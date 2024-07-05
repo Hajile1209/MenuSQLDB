@@ -6,7 +6,7 @@ namespace MenuDL
     public class SqlDbData
     {
         string connectionString
-        = "Data Source =ELIJAH\\SQLEXPRESS; Initial Catalog = MenuPlan; Integrated Security = True;";
+        = "Data Source =ELIJAH\\MSSQLSERVER01; Initial Catalog = MenuPlan; Integrated Security = True;";
 
         SqlConnection sqlConnection;
 
@@ -17,7 +17,7 @@ namespace MenuDL
 
         public List<Menu> GetMenus()
         {
-            string selectStatement = "SELECT Meal, Dish, Code FROM MenuPlan";
+            string selectStatement = "SELECT Meal, Dish, Code FROM Menu";
 
             SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection);
 
@@ -50,16 +50,18 @@ namespace MenuDL
         {
             int success;
 
-            string insertStatement = "INSERT INTO MenuPlan VALUES (@Meal, @Dish, @Code)";
+            string insertStatement = "INSERT INTO Menu VALUES(@Meal, @Dish, @Code)";
 
             SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
 
-            insertCommand.Parameters.AddWithValue(@Meal, Meal);
-            insertCommand.Parameters.AddWithValue(@Dish, Dish);
-            insertCommand.Parameters.AddWithValue(Code, Code);
+            insertCommand.Parameters.AddWithValue("@Meal", Meal);
+            insertCommand.Parameters.AddWithValue("@Dish", Dish);
+            insertCommand.Parameters.AddWithValue("@Code", Code);
+
             sqlConnection.Open();
 
             success = insertCommand.ExecuteNonQuery();
+
 
             sqlConnection.Close();
 
@@ -71,13 +73,12 @@ namespace MenuDL
         {
             int success;
 
-            string updateStatement = $"UPDATE MenuPlan SET Meal = @Meal, Code = @Code  WHERE Dish = @Dish ";
+            string updateStatement = $"UPDATE Menu SET Code = @Code WHERE Meal = @Meal";
             SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
             sqlConnection.Open();
 
             updateCommand.Parameters.AddWithValue("@Meal", Meal);
             updateCommand.Parameters.AddWithValue("@Code", Code);
-            updateCommand.Parameters.AddWithValue("@Dish", Dish);
 
             success = updateCommand.ExecuteNonQuery();
 
@@ -90,7 +91,7 @@ namespace MenuDL
         {
             int success;
 
-            string deleteStatement = $"UPDATE FROM MenuPlan WHERE Meal = @Meal, Dish = @Dish, Code = @Code";
+            string deleteStatement = $"UPDATE FROM Menu WHERE Meal = @Meal, Dish = @Dish, Code = @Code";
             SqlCommand deleteCommand = new SqlCommand(deleteStatement, sqlConnection);
             sqlConnection.Open();
 
