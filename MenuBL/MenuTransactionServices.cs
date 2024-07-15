@@ -62,9 +62,9 @@ namespace MenuBL
 
             return result;
         }
-        public bool DeleteMenu(string Meal, string Dish, string Code)
+        public bool DeleteMenu(string Code)
         {
-            Menu menu = new Menu { Meal = Meal, Dish = Dish, Code = Code };
+            Menu menu = new Menu {Code = Code };
 
             return DeleteMenu(menu);
         }

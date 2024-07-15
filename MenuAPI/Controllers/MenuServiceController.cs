@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MenuBL;
-
+using MenuModels;
 
 namespace MenuAPI.Controllers
 {
@@ -43,6 +43,21 @@ namespace MenuAPI.Controllers
         public JsonResult UpdateMenu(Menu request)
         {
             var result = menuTransactionServices.UpdateMenu(request.Meal, request.Dish, request.Code);
+
+            return new JsonResult(result);
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteMenu(MenuAPI.Menu request)
+        {
+
+            var delete = new MenuModels.Menu
+            {
+                Code = request.Code
+
+            };
+
+            var result = menuTransactionServices.DeleteMenu(delete);
 
             return new JsonResult(result);
         }

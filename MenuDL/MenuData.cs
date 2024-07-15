@@ -38,7 +38,7 @@ namespace MenuDL
 
         public int DeleteMenu(Menu menu)
         {
-            return sqlData.DeleteMenu(menu.Meal, menu.Dish, menu.Code);
+            return sqlData.DeleteMenu(menu.Code);
         }
 
     }

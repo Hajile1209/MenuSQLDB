@@ -6,7 +6,9 @@ namespace MenuDL
     public class SqlDbData
     {
         string connectionString
-        = "Data Source =ELIJAH\\MSSQLSERVER01; Initial Catalog = MenuPlan; Integrated Security = True;";
+            = "Server = tcp:20.2.38.141,1433; Database = MenuPlan; User Id = sa; Password = integ2!";
+
+        //= "Data Source =ELIJAH\\MSSQLSERVER01; Initial Catalog = MenuPlan; Integrated Security = True;";
 
         SqlConnection sqlConnection;
 
@@ -87,16 +89,15 @@ namespace MenuDL
             return success;
         }
 
-        public int DeleteMenu(string Meal, string Dish, string Code)
+        public int DeleteMenu(string Code)
         {
             int success;
 
-            string deleteStatement = $"UPDATE FROM Menu WHERE Meal = @Meal, Dish = @Dish, Code = @Code";
+            string deleteStatement = $"DELETE FROM Menu WHERE Code = @Code";
             SqlCommand deleteCommand = new SqlCommand(deleteStatement, sqlConnection);
             sqlConnection.Open();
 
-            deleteCommand.Parameters.AddWithValue("@Meal", Meal);
-            deleteCommand.Parameters.AddWithValue("@Dish", Dish);
+
             deleteCommand.Parameters.AddWithValue("@Code", Code);
 
             success = deleteCommand.ExecuteNonQuery();
