@@ -6,7 +6,7 @@ namespace MenuDL
     public class SqlDbData
     {
         string connectionString
-            = "Server = tcp:20.2.38.141,1433; Database = MenuPlan; User Id = sa; Password = integ2!";
+            = "Server = tcp:207.46.154.243,1433; Database = MenuPlan; User Id = sa; Password = integ2!";
 
         //= "Data Source =ELIJAH\\MSSQLSERVER01; Initial Catalog = MenuPlan; Integrated Security = True;";
 
